@@ -1,7 +1,7 @@
 <?php
 
-use BinarCode\Tenantable\Models\Tenant;
 use \Faker\Generator;
+use BinarCode\Tenantable\Models\Tenant;
 
 /* @var Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(Tenant::class, function (Generator $faker) {
