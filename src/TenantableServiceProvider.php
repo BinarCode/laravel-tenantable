@@ -20,9 +20,7 @@ class TenantableServiceProvider extends ServiceProvider
                 ], 'migrations');
             }
 
-            $this->commands([
-                MakeThirdPartyCommand::class,
-            ]);
+            $this->commands([]);
         }
     }
 
