@@ -13,8 +13,6 @@ class TenantableServiceProvider extends ServiceProvider
                 __DIR__ . '/../config/tenantable.php' => config_path('tenantable.php'),
             ], 'config');
 
-            // test
-
             if (! class_exists('CreatePackageTables')) {
                 $this->publishes([
                     __DIR__ . '/../database/migrations/create_tenantable_tables.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_tenantable_tables.php'),

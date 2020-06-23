@@ -15,7 +15,7 @@ class TenantTest extends TestCase
             'subdomain' => 'sample',
         ]);
 
-        $this->assertDatabaseCount('tenants', 1);
+        $this->assertCount(1, Tenant::get());
         $this->assertEquals('Binar Code Building', $tenant->name);
     }
 }
