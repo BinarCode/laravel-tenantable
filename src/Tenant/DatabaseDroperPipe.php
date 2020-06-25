@@ -21,7 +21,7 @@ class DatabaseDroperPipe implements Pipelineable
     public function __construct(Repository $config)
     {
         $this->config = $config;
-        $this->connection = $config->get('tenant.master_database_connection_name');
+        $this->connection = $config->get('tenantable.master_database_connection_name');
     }
 
     public function __invoke(Tenant $tenant, callable $next)
@@ -49,7 +49,7 @@ class DatabaseDroperPipe implements Pipelineable
             return false;
         }
 
-        if (! $this->config->get('tenant.drop_database')) {
+        if (! $this->config->get('tenantable.drop_database')) {
             return false;
         }
 

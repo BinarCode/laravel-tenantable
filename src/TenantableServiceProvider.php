@@ -2,7 +2,10 @@
 
 namespace BinarCode\Tenantable;
 
+use BinarCode\Tenantable\Commands\MasterMigrate;
 use BinarCode\Tenantable\Commands\SetupCommand;
+use BinarCode\Tenantable\Commands\TenantCommand;
+use BinarCode\Tenantable\Commands\TenantsMigrateCommand;
 use Illuminate\Support\ServiceProvider;
 
 class TenantableServiceProvider extends ServiceProvider
@@ -29,6 +32,9 @@ class TenantableServiceProvider extends ServiceProvider
 
             $this->commands([
                 SetupCommand::class,
+                MasterMigrate::class,
+                TenantCommand::class,
+                TenantsMigrateCommand::class,
             ]);
         }
     }

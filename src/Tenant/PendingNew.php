@@ -2,9 +2,9 @@
 
 namespace BinarCode\Tenantable\Tenant;
 
-use Binaryk\LaravelRestify\Traits\Make;
+use BinarCode\Tenantable\Make;
+use BinarCode\Tenantable\Models\Tenant;
 use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Support\Str;
 
 class PendingNew implements Arrayable
 {
@@ -52,7 +52,9 @@ class PendingNew implements Arrayable
     public function __destruct()
     {
         if ($this->create) {
-            tenant()->create($this->toArray());
+            /** * @var Tenant $query */
+            $query = tenant();
+            $query->create($this->toArray());
         }
     }
 
@@ -61,8 +63,8 @@ class PendingNew implements Arrayable
     {
         return [
             'name' => $this->name,
-            'database' => $this->database ?? config('tenant.database_name_prefix') . Str::lower(Str::snake($this->name)),
-            'subdomain' => $this->subdomain ?? Str::lower(Str::snake(Str::words($this->name, 1))),
+            'database' => $this->database,
+            'subdomain' => $this->subdomain,
         ];
     }
 }

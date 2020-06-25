@@ -2,7 +2,7 @@
 
 namespace BinarCode\Tenantable\Tenant;
 
-use App\Exceptions\InvalidConfiguration;
+use BinarCode\Tenantable\Exceptions\InvalidConfiguration;
 use BinarCode\Tenantable\Tenant\Contracts\Pipelineable;
 use BinarCode\Tenantable\Tenant\Contracts\Tenant;
 use Illuminate\Support\Facades\DB;
