@@ -4,6 +4,7 @@ namespace BinarCode\Tenantable\Commands;
 
 use BinarCode\Tenantable\Tenant\Contracts\Tenant;
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
@@ -17,8 +18,9 @@ class TenantCommand extends Command
 
     public function handle()
     {
-        /** * @var \BinarCode\Tenantable\Models\Tenant $query */
+        /** * @var Builder $query */
         $query = app(Tenant::class);
+
         $query = $query->query();
 
         if (! $tenantId = $this->option('tenant')) {
@@ -33,8 +35,7 @@ class TenantCommand extends Command
             $query->whereIn('id', Arr::wrap($tenantId));
         }
 
-        $query
-            ->cursor()
+        $query->cursor()
             ->each(
                 fn (Tenant $tenant) => $this->forTenant(
                     $tenant->makeCurrent(),

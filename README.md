@@ -14,7 +14,7 @@ I started working on this at the same time or even before [spatie](https://githu
 You can install the package via composer:
 
 ```bash
-composer require binarcode/larave-tenantable
+composer require binarcode/laravel-tenantable
 ```
 
 You can publish and run the migrations with:
