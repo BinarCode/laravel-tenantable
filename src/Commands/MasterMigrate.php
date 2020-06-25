@@ -5,6 +5,7 @@ namespace BinarCode\Tenantable\Commands;
 use BinarCode\Tenantable\Models\Tenant;
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
@@ -32,7 +33,7 @@ class MasterMigrate extends Command
         ];
 
         if (! $this->option('force')) {
-            if (! app()->runningUnitTests()) {
+            if (! App::runningUnitTests()) {
                 if (! $this->confirm('Create databases?')) {
                     Tenant::unsetEventDispatcher();
                 }

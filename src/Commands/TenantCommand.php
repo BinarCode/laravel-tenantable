@@ -5,6 +5,7 @@ namespace BinarCode\Tenantable\Commands;
 use BinarCode\Tenantable\Tenant\Contracts\Tenant;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 
@@ -26,7 +27,7 @@ class TenantCommand extends Command
 
         if (! $tenantId = $this->option('tenant')) {
             if (! $this->option('force')) {
-                if (! app()->runningUnitTests()) {
+                if (! App::runningUnitTests()) {
                     $tenantId = $this->ask('What tenant ID? Nothing for all tenants.');
                 }
             }

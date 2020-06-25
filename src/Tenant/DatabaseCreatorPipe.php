@@ -7,6 +7,7 @@ use BinarCode\Tenantable\Tenant\Contracts\Pipelineable;
 use BinarCode\Tenantable\Tenant\Contracts\Tenant;
 use Illuminate\Config\Repository;
 use Illuminate\Database\Connection;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseCreatorPipe implements Pipelineable
@@ -47,7 +48,7 @@ class DatabaseCreatorPipe implements Pipelineable
 
     public function createDatabase(Tenant $tenant): bool
     {
-        if (app()->runningUnitTests()) {
+        if (App::runningUnitTests()) {
             return false;
         }
 
@@ -60,7 +61,7 @@ class DatabaseCreatorPipe implements Pipelineable
 
     public function databaseExists(string $name): bool
     {
-        if (app()->runningUnitTests()) {
+        if (App::runningUnitTests()) {
             return false;
         }
 
