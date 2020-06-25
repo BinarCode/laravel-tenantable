@@ -21,10 +21,6 @@ class TenantCommand extends Command
         $query = app(Tenant::class);
         $query = $query->query();
 
-        if (! $command = $this->argument('artisanCommand')) {
-            $command = $this->ask('Command to run?');
-        }
-
         if (! $tenantId = $this->option('tenant')) {
             if (! $this->option('force')) {
                 if (! App::runningUnitTests()) {
@@ -40,7 +36,10 @@ class TenantCommand extends Command
         $query
             ->cursor()
             ->each(
-                fn (Tenant $tenant) => $this->forTenant($tenant->makeCurrent(), $command)
+                fn (Tenant $tenant) => $this->forTenant(
+                    $tenant->makeCurrent(),
+                    $this->argument('artisanCommand') ?? $this->ask('Command to run?')
+                )
             );
     }
 
