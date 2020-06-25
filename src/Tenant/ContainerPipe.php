@@ -3,19 +3,19 @@
 namespace BinarCode\Tenantable\Tenant;
 
 use BinarCode\Tenantable\Tenant\Contracts\Pipelineable;
-use BinarCode\Tenantable\Tenant\Contracts\Tenant;
+use BinarCode\Tenantable\Tenant\Contracts\Tenantable;
 
 class ContainerPipe implements Pipelineable
 {
-    public function __invoke(Tenant $tenant, callable $next)
+    public function __invoke(Tenantable $tenant, callable $next)
     {
         app()->forgetInstance($tenant->containerKey());
 
-        app()->forgetInstance(Tenant::class);
+        app()->forgetInstance(Tenantable::class);
 
         app()->instance($tenant->containerKey(), $tenant);
 
-        app()->instance(Tenant::class, $tenant);
+        app()->instance(Tenantable::class, $tenant);
 
         return $next($tenant);
     }

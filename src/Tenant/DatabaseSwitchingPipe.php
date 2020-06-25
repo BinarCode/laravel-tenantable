@@ -4,12 +4,12 @@ namespace BinarCode\Tenantable\Tenant;
 
 use BinarCode\Tenantable\Exceptions\InvalidConfiguration;
 use BinarCode\Tenantable\Tenant\Contracts\Pipelineable;
-use BinarCode\Tenantable\Tenant\Contracts\Tenant;
+use BinarCode\Tenantable\Tenant\Contracts\Tenantable;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseSwitchingPipe implements Pipelineable
 {
-    public function __invoke(Tenant $tenant, callable $next)
+    public function __invoke(Tenantable $tenant, callable $next)
     {
         $tenantConnectionName = $tenant->tenantDatabaseConnectionName();
 

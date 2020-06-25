@@ -4,7 +4,7 @@ namespace BinarCode\Tenantable\Tenant;
 
 use BinarCode\Tenantable\Exceptions\BecauseDatabase;
 use BinarCode\Tenantable\Tenant\Contracts\Pipelineable;
-use BinarCode\Tenantable\Tenant\Contracts\Tenant;
+use BinarCode\Tenantable\Tenant\Contracts\Tenantable;
 use Illuminate\Config\Repository;
 use Illuminate\Database\Connection;
 use Illuminate\Support\Facades\App;
@@ -25,7 +25,7 @@ class DatabaseCreatorPipe implements Pipelineable
         $this->connection = $config->get('tenantable.master_database_connection_name');
     }
 
-    public function __invoke(Tenant $tenant, $next)
+    public function __invoke(Tenantable $tenant, $next)
     {
         $this->purgeExistingDatabase($tenant, $next);
 
@@ -46,7 +46,7 @@ class DatabaseCreatorPipe implements Pipelineable
         return DB::connection($this->connection);
     }
 
-    public function createDatabase(Tenant $tenant): bool
+    public function createDatabase(Tenantable $tenant): bool
     {
         if (App::runningUnitTests()) {
             return false;
@@ -68,7 +68,7 @@ class DatabaseCreatorPipe implements Pipelineable
         return (bool)$this->database()->select("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$name'");
     }
 
-    public function createDatabaseUser(Tenant $tenant)
+    public function createDatabaseUser(Tenantable $tenant)
     {
         if ($this->config->get('tenantable.create_database_user')) {
             $privileges = 'ALL';
@@ -86,7 +86,7 @@ class DatabaseCreatorPipe implements Pipelineable
         }
     }
 
-    public function purgeExistingDatabase(Tenant $tenant, $next)
+    public function purgeExistingDatabase(Tenantable $tenant, $next)
     {
         if ($this->config->get('tenantable.override_existing_database')) {
             app(DatabaseDroperPipe::class)->__invoke($tenant, $next);

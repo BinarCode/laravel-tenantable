@@ -4,7 +4,7 @@ namespace BinarCode\Tenantable\Tenant\Listeners;
 
 use BinarCode\Tenantable\Events\TenantDeleted;
 use BinarCode\Tenantable\Events\TenantDeletionDone;
-use BinarCode\Tenantable\Tenant\Contracts\Tenant;
+use BinarCode\Tenantable\Tenant\Contracts\Tenantable;
 use Illuminate\Routing\Pipeline;
 
 class TenantDeletedListen
@@ -16,6 +16,6 @@ class TenantDeletedListen
             ->via('__invoke')
             ->through(
                 config('tenantable.deleted_pipeline')
-            )->then(fn (Tenant $tenant) => event(new TenantDeletionDone($tenant)));
+            )->then(fn (Tenantable $tenant) => event(new TenantDeletionDone($tenant)));
     }
 }

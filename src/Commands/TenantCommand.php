@@ -2,7 +2,7 @@
 
 namespace BinarCode\Tenantable\Commands;
 
-use BinarCode\Tenantable\Tenant\Contracts\Tenant;
+use BinarCode\Tenantable\Tenant\Contracts\Tenantable;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
@@ -19,7 +19,7 @@ class TenantCommand extends Command
     public function handle()
     {
         /** * @var Builder $query */
-        $query = app(Tenant::class);
+        $query = app(Tenantable::class);
 
         $query = $query->query();
 
@@ -37,14 +37,14 @@ class TenantCommand extends Command
 
         $query->cursor()
             ->each(
-                fn (Tenant $tenant) => $this->forTenant(
+                fn (Tenantable $tenant) => $this->forTenant(
                     $tenant->makeCurrent(),
                     $this->argument('artisanCommand') ?? $this->ask('Command to run?')
                 )
             );
     }
 
-    protected function forTenant(Tenant $tenant, string $command): void
+    protected function forTenant(Tenantable $tenant, string $command): void
     {
         // in case the command passed was: php artisan migrate (not just 'migrate')
         $command = trim(Str::after($command, 'artisan'));

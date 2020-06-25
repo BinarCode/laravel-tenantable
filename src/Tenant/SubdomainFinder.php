@@ -4,7 +4,7 @@ namespace BinarCode\Tenantable\Tenant;
 
 use BinarCode\Tenantable\Exceptions\InvalidSubdomain;
 use BinarCode\Tenantable\Make;
-use BinarCode\Tenantable\Tenant\Contracts\Tenant;
+use BinarCode\Tenantable\Tenant\Contracts\Tenantable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -32,10 +32,10 @@ class SubdomainFinder implements Contracts\TenantFinder
     }
 
     /**
-     * @return Tenant|null
+     * @return Tenantable|null
      * @throws InvalidSubdomain
      */
-    public function __invoke(): ?Tenant
+    public function __invoke(): ?Tenantable
     {
         /**
          * @var \BinarCode\Tenantable\Models\Tenant $query

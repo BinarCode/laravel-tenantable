@@ -5,8 +5,8 @@ namespace App\Providers;
 use BinarCode\Tenantable\Events\TenantActivating;
 use BinarCode\Tenantable\Events\TenantCreated;
 use BinarCode\Tenantable\Events\TenantDeleted;
-use App\Models\Master\Organization;
-use BinarCode\Tenantable\Tenant\Contracts\Tenant;
+use BinarCode\Tenantable\Models\Tenant;
+use BinarCode\Tenantable\Tenant\Contracts\Tenantable;
 use BinarCode\Tenantable\Tenant\Listeners\TenantActivatingListen;
 use BinarCode\Tenantable\Tenant\Listeners\TenantCreatedListen;
 use BinarCode\Tenantable\Tenant\Listeners\TenantDeletedListen;
@@ -47,10 +47,10 @@ class TenantableApplicationServiceProvider extends ServiceProvider
             return $this;
         }
 
-        $organization = SubdomainFinder::make($this->app->request)->__invoke();
+        $tenant = SubdomainFinder::make($this->app->request)->__invoke();
 
-        if ($organization instanceof Tenant) {
-            $organization->makeCurrent();
+        if ($tenant instanceof Tenantable) {
+            $tenant->makeCurrent();
 //                $this->app['auth']->setDefaultDriver('tenants');
         }
 
@@ -60,14 +60,14 @@ class TenantableApplicationServiceProvider extends ServiceProvider
     public function configureQueue()
     {
         $this->app['queue']->createPayloadUsing(function () {
-            return app(Tenant::class)->check() ? [
-                'tenant_id' => app(Tenant::class)->id,
+            return app(Tenantable::class)->check() ? [
+                'tenant_id' => app(Tenantable::class)->id,
             ] : [];
         });
 
         $this->app['events']->listen(JobProcessing::class, function ($event) {
             if (isset($event->job->payload()['tenant_id'])) {
-                app(Tenant::class)
+                app(Tenantable::class)
                     ->query()
                     ->find($event->job->payload()['tenant_id'])
                     ->makeCurrent();
@@ -79,7 +79,7 @@ class TenantableApplicationServiceProvider extends ServiceProvider
 
     public function bindTenant()
     {
-        $this->app->instance(Tenant::class, new Organization);
+        $this->app->instance(Tenantable::class, new Tenant);
 
         return $this;
     }

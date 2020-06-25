@@ -1,13 +1,13 @@
 <?php
 
-use BinarCode\Tenantable\Tenant\Contracts\Tenant;
+use BinarCode\Tenantable\Tenant\Contracts\Tenantable;
 
-function tenant(): Tenant
+function tenant(): Tenantable
 {
-    return app(Tenant::class);
+    return app(Tenantable::class);
 }
 
 function fromTenant($property = null)
 {
-    return data_get(app(Tenant::class), $property);
+    return data_get(app(Tenantable::class), $property);
 }

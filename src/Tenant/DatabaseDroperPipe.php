@@ -3,7 +3,7 @@
 namespace BinarCode\Tenantable\Tenant;
 
 use BinarCode\Tenantable\Tenant\Contracts\Pipelineable;
-use BinarCode\Tenantable\Tenant\Contracts\Tenant;
+use BinarCode\Tenantable\Tenant\Contracts\Tenantable;
 use Illuminate\Config\Repository;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\App;
@@ -25,7 +25,7 @@ class DatabaseDroperPipe implements Pipelineable
         $this->connection = $config->get('tenantable.master_database_connection_name');
     }
 
-    public function __invoke(Tenant $tenant, callable $next)
+    public function __invoke(Tenantable $tenant, callable $next)
     {
         if (! $this->databaseExists($tenant->databaseConfig()->name())) {
             return;
@@ -44,7 +44,7 @@ class DatabaseDroperPipe implements Pipelineable
         return DB::connection($this->connection);
     }
 
-    public function dropDatabase(Tenant $tenant): bool
+    public function dropDatabase(Tenantable $tenant): bool
     {
         if (App::runningInConsole()) {
             return false;
@@ -68,7 +68,7 @@ class DatabaseDroperPipe implements Pipelineable
         return (bool)$this->database()->select("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$name'");
     }
 
-    public function dropUser(Tenant $tenant): bool
+    public function dropUser(Tenantable $tenant): bool
     {
         $username = $tenant->databaseConfig()->username();
         $host = $tenant->databaseConfig()->host();

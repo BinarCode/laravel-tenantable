@@ -9,12 +9,12 @@ use BinarCode\Tenantable\Events\TenantSaved;
 use BinarCode\Tenantable\Events\TenantUpdated;
 use BinarCode\Tenantable\Models\Concerns\UsesMasterConnection;
 use BinarCode\Tenantable\Tenant\Contracts\DatabaseConfig;
-use BinarCode\Tenantable\Tenant\Contracts\Tenant as TenantContract;
+use BinarCode\Tenantable\Tenant\Contracts\Tenantable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class Tenant extends Model implements TenantContract
+class Tenant extends Model implements Tenantable
 {
     use UsesMasterConnection;
 
@@ -33,7 +33,7 @@ class Tenant extends Model implements TenantContract
         return Str::lower(Str::snake($this->getKey()));
     }
 
-    public static function current(): ?TenantContract
+    public static function current(): ?Tenant
     {
         $containerKey = config('tenant.container_key');
 
@@ -46,7 +46,7 @@ class Tenant extends Model implements TenantContract
 
     public static function check(): bool
     {
-        return static::current() instanceof TenantContract;
+        return static::current() instanceof Tenant;
     }
 
     public static function isMaster(): bool
@@ -54,7 +54,7 @@ class Tenant extends Model implements TenantContract
         return ! static::check();
     }
 
-    public function makeCurrent(): TenantContract
+    public function makeCurrent(): Tenant
     {
         event(new TenantActivating($this));
 
