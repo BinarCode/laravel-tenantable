@@ -25,6 +25,8 @@ class Tenant extends Model implements TenantContract
         'updated' => TenantUpdated::class,
     ];
 
+    protected $guarded = ['id'];
+
 
     public function key(): ?string
     {
