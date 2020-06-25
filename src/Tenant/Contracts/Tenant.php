@@ -28,4 +28,8 @@ interface Tenant
     public function getConnectionName();
 
     public function databaseConfig(): DatabaseConfig;
+
+    public function tenantDatabaseConnectionName(): ?string;
+
+    public function containerKey(): string;
 }

@@ -6,6 +6,7 @@ use BinarCode\Tenantable\Tenant\Contracts\Pipelineable;
 use BinarCode\Tenantable\Tenant\Contracts\Tenant;
 use Illuminate\Config\Repository;
 use Illuminate\Database\ConnectionInterface;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseDroperPipe implements Pipelineable
@@ -21,7 +22,7 @@ class DatabaseDroperPipe implements Pipelineable
     public function __construct(Repository $config)
     {
         $this->config = $config;
-        $this->connection = $config->get('tenant.master_database_connection_name');
+        $this->connection = $config->get('tenantable.master_database_connection_name');
     }
 
     public function __invoke(Tenant $tenant, callable $next)
@@ -45,11 +46,11 @@ class DatabaseDroperPipe implements Pipelineable
 
     public function dropDatabase(Tenant $tenant): bool
     {
-        if (app()->runningUnitTests()) {
+        if (App::runningInConsole()) {
             return false;
         }
 
-        if (! $this->config->get('tenant.drop_database')) {
+        if (! $this->config->get('tenantable.drop_database')) {
             return false;
         }
 
@@ -60,7 +61,7 @@ class DatabaseDroperPipe implements Pipelineable
 
     public function databaseExists(string $name): bool
     {
-        if (app()->runningUnitTests()) {
+        if (App::runningUnitTests()) {
             return false;
         }
 

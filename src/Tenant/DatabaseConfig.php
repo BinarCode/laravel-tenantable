@@ -2,9 +2,10 @@
 
 namespace BinarCode\Tenantable\Tenant;
 
+use BinarCode\Tenantable\Make;
 use BinarCode\Tenantable\Tenant\Contracts\Tenant;
-use Binaryk\LaravelRestify\Traits\Make;
 use Illuminate\Contracts\Config\Repository;
+use Illuminate\Support\Facades\App;
 
 class DatabaseConfig implements Contracts\DatabaseConfig
 {
@@ -27,11 +28,11 @@ class DatabaseConfig implements Contracts\DatabaseConfig
 
     public function name(): string
     {
-        if (app()->runningUnitTests()) {
+        if (App::runningUnitTests()) {
             return ':memory:';
         }
 
-        return $this->tenant->database;
+        return $this->tenant->databaseConfig()->name();
     }
 
     public function username(): ?string

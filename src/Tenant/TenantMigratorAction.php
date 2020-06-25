@@ -11,7 +11,7 @@ class TenantMigratorAction
     {
         return Artisan::call('tenant', [
             'artisanCommand' => 'migrate:fresh --seed',
-            '--tenant' => $tenant->id,
+            '--tenant' => $tenant->key(),
             '--force' => true,
         ]);
     }

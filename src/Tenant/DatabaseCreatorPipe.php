@@ -2,11 +2,12 @@
 
 namespace BinarCode\Tenantable\Tenant;
 
-use App\Exceptions\BecauseDatabase;
+use BinarCode\Tenantable\Exceptions\BecauseDatabase;
 use BinarCode\Tenantable\Tenant\Contracts\Pipelineable;
 use BinarCode\Tenantable\Tenant\Contracts\Tenant;
 use Illuminate\Config\Repository;
-use Illuminate\Database\ConnectionInterface;
+use Illuminate\Database\Connection;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseCreatorPipe implements Pipelineable
@@ -21,7 +22,7 @@ class DatabaseCreatorPipe implements Pipelineable
     public function __construct(Repository $config)
     {
         $this->config = $config;
-        $this->connection = $config->get('tenant.master_database_connection_name');
+        $this->connection = $config->get('tenantable.master_database_connection_name');
     }
 
     public function __invoke(Tenant $tenant, $next)
@@ -40,14 +41,14 @@ class DatabaseCreatorPipe implements Pipelineable
         return $next($tenant);
     }
 
-    protected function database(): ConnectionInterface
+    protected function database(): Connection
     {
         return DB::connection($this->connection);
     }
 
     public function createDatabase(Tenant $tenant): bool
     {
-        if (app()->runningUnitTests()) {
+        if (App::runningUnitTests()) {
             return false;
         }
 
@@ -60,7 +61,7 @@ class DatabaseCreatorPipe implements Pipelineable
 
     public function databaseExists(string $name): bool
     {
-        if (app()->runningUnitTests()) {
+        if (App::runningUnitTests()) {
             return false;
         }
 
@@ -69,7 +70,7 @@ class DatabaseCreatorPipe implements Pipelineable
 
     public function createDatabaseUser(Tenant $tenant)
     {
-        if ($this->config->get('tenant.create_database_user')) {
+        if ($this->config->get('tenantable.create_database_user')) {
             $privileges = 'ALL';
 
             $host = $tenant->databaseConfig()->host();
@@ -87,7 +88,7 @@ class DatabaseCreatorPipe implements Pipelineable
 
     public function purgeExistingDatabase(Tenant $tenant, $next)
     {
-        if ($this->config->get('tenant.override_existing_database')) {
+        if ($this->config->get('tenantable.override_existing_database')) {
             app(DatabaseDroperPipe::class)->__invoke($tenant, $next);
         }
     }

@@ -2,9 +2,9 @@
 
 namespace BinarCode\Tenantable\Tenant;
 
-use App\Exceptions\InvalidSubdomain;
+use BinarCode\Tenantable\Exceptions\InvalidSubdomain;
+use BinarCode\Tenantable\Make;
 use BinarCode\Tenantable\Tenant\Contracts\Tenant;
-use Binaryk\LaravelRestify\Traits\Make;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -37,7 +37,13 @@ class SubdomainFinder implements Contracts\TenantFinder
      */
     public function __invoke(): ?Tenant
     {
-        $tenant = app(Tenant::class)
+        /**
+         * @var \BinarCode\Tenantable\Models\Tenant $query
+         */
+        $query = tenant();
+
+        $tenant = $query
+            ->newQuery()
             ->where('subdomain', $actual = $this->subdomain($this->request))
             ->first();
 
@@ -55,10 +61,9 @@ class SubdomainFinder implements Contracts\TenantFinder
         $parts = explode('.', $hostname);
 
         // If we're on localhost or an IP address, then we're not visiting a subdomain.
-        $notADomain = in_array(count($parts), [1, 5]); //@todo - why is this?
-        $thirdPartyDomain = ! Str::endsWith($hostname, config('tenant.master_domain'));
-        ;
-        $isMaster = config('tenant.master_domain') === $hostname;
+        $notADomain = in_array(count($parts), [1, 5]);
+        $thirdPartyDomain = ! Str::endsWith($hostname, config('tenantable.master_domain'));
+        $isMaster = config('tenantable.master_domain') === $hostname;
 
         if ($notADomain || $thirdPartyDomain || $isMaster) {
             return null;
