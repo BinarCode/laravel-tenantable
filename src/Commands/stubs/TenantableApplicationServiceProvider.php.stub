@@ -79,7 +79,8 @@ class TenantableApplicationServiceProvider extends ServiceProvider
 
     public function bindTenant()
     {
-        $this->app->instance(Tenantable::class, new Tenant);
+        $class = config('tenantable.model');
+        $this->app->instance(Tenantable::class, new $class);
 
         return $this;
     }
