@@ -16,28 +16,30 @@ You can install the package via composer:
 composer require binarcode/laravel-tenantable
 ```
 
-You can publish and run the migrations with:
+Now lets setup it:
 
 ```bash
-php artisan vendor:publish --provider="BinarCode\Tenantable\TenantableServiceProvider" --tag="migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-```bash
-php artisan vendor:publish --provider="BinarCode\Tenantable\TenantableServiceProvider" --tag="config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
+php artisan tenantable:setup
 ```
 
 ## Usage
 
-//
+Let's say you have the `App\Models\Orgnization` as a tenant model. 
+
+This model has to implement the `BinarCode\Tenantable\Tenant\Contracts\Tenant` contract.
+
+If you want to benefit of all of the methods the contract as you to implement, just extends the `BinarCode\Tenantable\Models\Tenant` class, and you don't have to add anything else in your model.
+
+Now I'll take it step by step, since I was very confused when I implemented my firt multitenancy application. 
+
+
+### Migrations
+
+You need 2 types of migrations, `master` and `tenant`. The migrations in the `app\database\migrations` directory, are used for `tenant`. If you have to add migrations for the `master` use `app\database\migrations\master` directory.
+
+
+...to be continue
+
 
 ## Testing
 
