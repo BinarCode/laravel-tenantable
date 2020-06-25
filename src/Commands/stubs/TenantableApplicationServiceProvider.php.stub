@@ -1,0 +1,86 @@
+<?php
+
+namespace App\Providers;
+
+use BinarCode\Tenantable\Events\TenantActivating;
+use BinarCode\Tenantable\Events\TenantCreated;
+use BinarCode\Tenantable\Events\TenantDeleted;
+use App\Models\Master\Organization;
+use BinarCode\Tenantable\Tenant\Contracts\Tenant;
+use BinarCode\Tenantable\Tenant\Listeners\TenantActivatingListen;
+use BinarCode\Tenantable\Tenant\Listeners\TenantCreatedListen;
+use BinarCode\Tenantable\Tenant\Listeners\TenantDeletedListen;
+use Illuminate\Queue\Events\JobProcessing;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\ServiceProvider;
+
+class TenantableApplicationServiceProvider extends ServiceProvider
+{
+    public function boot()
+    {
+        Event::listen(TenantCreated::class, TenantCreatedListen::class);
+        Event::listen(TenantDeleted::class, TenantDeletedListen::class);
+        Event::listen(TenantActivating::class, TenantActivatingListen::class);
+
+        $hostname = $this->app->request->getHost();
+
+        $this->bindTenant();
+
+        if ($isMasterDomain = $hostname === config('tenant.master_fqdn')) {
+            tenant()->makeCurrentMaster();
+
+            return;
+        }
+
+        $this
+            ->configureRequests()
+            ->configureQueue();
+    }
+
+    public function configureRequests()
+    {
+        if ($this->app->runningInConsole()) {
+            return $this;
+        }
+
+        if (! SubdomainFinder::make($this->app->request)->subdomain($this->app->request)) {
+            return $this;
+        }
+
+        $organization = SubdomainFinder::make($this->app->request)->__invoke();
+
+        if ($organization instanceof Tenant) {
+            $organization->makeCurrent();
+//                $this->app['auth']->setDefaultDriver('tenants');
+        }
+
+        return $this;
+    }
+
+    public function configureQueue()
+    {
+        $this->app['queue']->createPayloadUsing(function () {
+            return app(Tenant::class)->check() ? [
+                'tenant_id' => app(Tenant::class)->id,
+            ] : [];
+        });
+
+        $this->app['events']->listen(JobProcessing::class, function ($event) {
+            if (isset($event->job->payload()['tenant_id'])) {
+                app(Tenant::class)
+                    ->query()
+                    ->find($event->job->payload()['tenant_id'])
+                    ->makeCurrent();
+            }
+        });
+
+        return $this;
+    }
+
+    public function bindTenant()
+    {
+        $this->app->instance(Tenant::class, new Organization);
+
+        return $this;
+    }
+}
