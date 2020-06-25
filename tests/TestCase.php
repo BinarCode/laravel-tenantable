@@ -2,7 +2,6 @@
 
 namespace BinarCode\Tenantable\Tests;
 
-use BinarCode\Tenantable\Models\Tenant;
 use BinarCode\Tenantable\TenantableServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
