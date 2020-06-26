@@ -9,7 +9,7 @@ return [
     /**
      * The base model for tenant.
      */
-    'model' => BinarCode\Tenantable\Models\Tenant::class,
+    'model' => BinarCode\Tenantable\Models\TenantContract::class,
 
     /*
     * Domain for the maine application

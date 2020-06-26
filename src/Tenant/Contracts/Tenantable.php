@@ -2,7 +2,7 @@
 
 namespace BinarCode\Tenantable\Tenant\Contracts;
 
-interface Tenant
+interface Tenantable
 {
     /**
      * Used for unique identifies, as database name
@@ -13,17 +13,17 @@ interface Tenant
 
     public static function check(): bool;
 
-    public static function current(): ?Tenant;
+    public static function current(): ?Tenantable;
 
     public static function isMaster(): bool;
 
-    public function makeCurrent(): Tenant;
+    public function makeCurrent(): Tenantable;
 
     public function makeCurrentMaster();
 
     public function isActive(): bool;
 
-    public function forget(): Tenant;
+    public function forget(): Tenantable;
 
     public function getConnectionName();
 

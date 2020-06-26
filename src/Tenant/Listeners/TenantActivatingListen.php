@@ -4,7 +4,7 @@ namespace BinarCode\Tenantable\Tenant\Listeners;
 
 use BinarCode\Tenantable\Events\TenantActivating;
 use BinarCode\Tenantable\Events\TenantActivationDone;
-use BinarCode\Tenantable\Tenant\Contracts\Tenant;
+use BinarCode\Tenantable\Tenant\Contracts\Tenantable;
 use Illuminate\Routing\Pipeline;
 
 class TenantActivatingListen
@@ -16,6 +16,6 @@ class TenantActivatingListen
             ->via('__invoke')
             ->through(
                 config('tenantable.activating_pipeline')
-            )->then(fn (Tenant $tenant) => event(new TenantActivationDone($tenant)));
+            )->then(fn (Tenantable $tenant) => event(new TenantActivationDone($tenant)));
     }
 }

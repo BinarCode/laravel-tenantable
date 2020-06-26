@@ -4,7 +4,7 @@ namespace BinarCode\Tenantable\Tenant\Listeners;
 
 use BinarCode\Tenantable\Events\TenantCreated;
 use BinarCode\Tenantable\Events\TenantCreationDone;
-use BinarCode\Tenantable\Tenant\Contracts\Tenant;
+use BinarCode\Tenantable\Tenant\Contracts\Tenantable;
 use Illuminate\Routing\Pipeline;
 
 class TenantCreatedListen
@@ -16,6 +16,6 @@ class TenantCreatedListen
             ->via('__invoke')
             ->through(
                 config('tenantable.created_pipeline')
-            )->then(fn (Tenant $tenant) => event(new TenantCreationDone($tenant)));
+            )->then(fn (Tenantable $tenant) => event(new TenantCreationDone($tenant)));
     }
 }

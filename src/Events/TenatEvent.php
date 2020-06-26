@@ -2,17 +2,17 @@
 
 namespace BinarCode\Tenantable\Events;
 
-use BinarCode\Tenantable\Tenant\Contracts\Tenant;
+use BinarCode\Tenantable\Tenant\Contracts\Tenantable;
 use Illuminate\Queue\SerializesModels;
 
 class TenatEvent
 {
     use SerializesModels;
 
-    /** * @var Tenant */
-    public Tenant $tenant;
+    /** * @var Tenantable */
+    public Tenantable $tenant;
 
-    public function __construct(Tenant $tenant)
+    public function __construct(Tenantable $tenant)
     {
         $this->tenant = $tenant;
     }

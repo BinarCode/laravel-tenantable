@@ -3,7 +3,7 @@
 namespace BinarCode\Tenantable\Tenant;
 
 use BinarCode\Tenantable\Make;
-use BinarCode\Tenantable\Tenant\Contracts\Tenant;
+use BinarCode\Tenantable\Tenant\Contracts\Tenantable;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Facades\App;
 
@@ -12,15 +12,15 @@ class DatabaseConfig implements Contracts\DatabaseConfig
     use Make;
 
     /**
-     * @var Tenant
+     * @var Tenantable
      */
-    private Tenant $tenant;
+    private Tenantable $tenant;
     /**
      * @var Repository
      */
     private Repository $config;
 
-    public function __construct(Tenant $tenant)
+    public function __construct(Tenantable $tenant)
     {
         $this->tenant = $tenant;
         $this->config = app(Repository::class);
