@@ -2,8 +2,8 @@
 
 namespace BinarCode\Tenantable\Http\Middleware;
 
-use Symfony\Component\HttpFoundation\Response;
 use Closure;
+use Symfony\Component\HttpFoundation\Response;
 
 class EnsureValidTenantSession
 {
