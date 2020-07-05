@@ -35,7 +35,8 @@ class Tenant extends Model implements Tenantable
 
     public static function current(): ?Tenant
     {
-        $containerKey = config('tenant.container_key');
+        $containerKey = config('tenantable.container_key');
+
 
         if (! app()->has($containerKey)) {
             return null;
@@ -54,7 +55,7 @@ class Tenant extends Model implements Tenantable
         return ! static::check();
     }
 
-    public function makeCurrent(): Tenant
+    public function makeCurrent(): Tenantable
     {
         event(new TenantActivating($this));
 

@@ -10,6 +10,7 @@ use BinarCode\Tenantable\Tenant\Contracts\Tenantable;
 use BinarCode\Tenantable\Tenant\Listeners\TenantActivatingListen;
 use BinarCode\Tenantable\Tenant\Listeners\TenantCreatedListen;
 use BinarCode\Tenantable\Tenant\Listeners\TenantDeletedListen;
+use BinarCode\Tenantable\Tenant\SubdomainFinder;
 use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
