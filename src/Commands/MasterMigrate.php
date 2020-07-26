@@ -25,9 +25,9 @@ class MasterMigrate extends Command
         $this->confirmToProceed();
 
         $options = [
-            '--database' => config('tenant.master_database_connection_name'),
-            '--realpath' => config('tenant.master_migrations_path'),
-            '--path' => config('tenant.master_migrations_path'),
+            '--database' => config('tenantable.master_database_connection_name'),
+            '--realpath' => config('tenantable.master_migrations_path'),
+            '--path' => config('tenantable.master_migrations_path'),
             '--seed' => $this->option('seed'),
             '--force' => $this->option('force'),
         ];
@@ -42,7 +42,7 @@ class MasterMigrate extends Command
 
         if ($this->option('force')) {
             config([
-                'tenant.override_existing_database' => true,
+                'tenantable.override_existing_database' => true,
             ]);
         }
 

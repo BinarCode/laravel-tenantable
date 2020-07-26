@@ -56,14 +56,14 @@ return [
     /*
      * This key will be used to bind the current tenant in the container.
      */
-    'container_key' => 'organization',
+    'container_key' => 'tenant',
 
 
     /*
      * This key will be used to bind current database prefix key
-     * Generated name: e.g. construction_ . $tenant->key()
+     * Generated name: e.g. tenant_ . $tenant->key()
      */
-    'database_name_prefix' => 'construction_',
+    'database_name_prefix' => 'tenant_',
 
     /*
      * This is pipeline list of actions to perform when a new tenant was created
