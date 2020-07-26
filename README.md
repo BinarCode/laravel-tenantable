@@ -6,8 +6,6 @@
 
 Just another multi tenant support package for Laravel. Heavily inspired from [Mohamed Said](https://github.com/themsaid) multitenancy videos. 
 
-I started working on this at the same time or even before [spatie](https://github.com/spatie/laravel-multitenancy) started, because we need it for a real project, and it was part of that project. Now I've decided to move it into a separate package, so we can separate the logic, tests and support for this module.
-
 ## Installation
 
 You can install the package via composer:
