@@ -1,9 +1,11 @@
 # Laravel Tenantable
 
 <p align="center">
+
 [![Latest Stable Version](https://poser.pugx.org/binarcode/laravel-tenantable/v)](//packagist.org/packages/binarcode/laravel-tenantable)
 [![Latest Unstable Version](https://poser.pugx.org/binarcode/laravel-tenantable/v/unstable)](//packagist.org/packages/binarcode/laravel-tenantable)
 [![License](https://poser.pugx.org/binarcode/laravel-tenantable/license)](//packagist.org/packages/binarcode/laravel-tenantable)
+
 </p>
 
 
