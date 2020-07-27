@@ -1,8 +1,11 @@
 # Laravel Tenantable
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/binarcode/y.svg?style=flat-square)](https://packagist.org/packages/binarcode/y)
+<p align="center">
+[![Latest Stable Version](https://poser.pugx.org/binarcode/laravel-tenantable/v)](//packagist.org/packages/binarcode/laravel-tenantable)
+[![Latest Unstable Version](https://poser.pugx.org/binarcode/laravel-tenantable/v/unstable)](//packagist.org/packages/binarcode/laravel-tenantable)
+[![License](https://poser.pugx.org/binarcode/laravel-tenantable/license)](//packagist.org/packages/binarcode/laravel-tenantable)
+</p>
 
-![Tests](https://github.com/BinarCode/laravel-tenantable/workflows/Tests/badge.svg?branch=master)
 
 Just another multi tenant support package for Laravel. Heavily inspired from [Mohamed Said](https://github.com/themsaid) multitenancy videos. 
 
