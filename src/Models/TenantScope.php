@@ -10,7 +10,7 @@ class TenantScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        $builder->where(BelongsToTenant::$tenantIdColumn, tenant()->key());
+        $builder->where($model->qualifyColumn(BelongsToTenant::$tenantIdColumn), tenant()->key());
     }
 
     public function extend(Builder $builder)
