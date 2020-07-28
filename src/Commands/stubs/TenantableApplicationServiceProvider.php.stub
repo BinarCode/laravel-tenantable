@@ -27,7 +27,7 @@ class TenantableApplicationServiceProvider extends ServiceProvider
 
         $this->bindTenant();
 
-        if ($isMasterDomain = $hostname === config('tenant.master_fqdn')) {
+        if ($isMasterDomain = $hostname === config('tenantable.master_fqdn')) {
             tenant()->makeCurrentMaster();
 
             return;
