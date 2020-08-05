@@ -42,5 +42,9 @@ class TenantableServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/tenantable.php', 'tenantable');
+
+        $this->app->bind('tenantable', function ($app) {
+            return new Tenantable();
+        });
     }
 }

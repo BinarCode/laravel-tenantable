@@ -5,7 +5,8 @@ namespace BinarCode\Tenantable;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \BinarCode\LaravelThirdParty\Tenantable
+ * @method static useColumn(string $column)
+ * @see Tenantable
  */
 class TenantableFacade extends Facade
 {
