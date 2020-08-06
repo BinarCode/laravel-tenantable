@@ -15,12 +15,8 @@ composer require binarcode/laravel-tenantable
 
 ## Setup
 
-```shell script
-php artisan vendor:publish --provider="BinarCode\Tenantable\TenantableServiceProvider" --tag="tenantable-config"
-
-php artisan vendor:publish --provider="BinarCode\Tenantable\TenantableServiceProvider" --tag="tenantable-migrations"
-
-php artisan vendor:publish --provider="BinarCode\Tenantable\TenantableServiceProvider" --tag="tenantable-provider"
+```bash
+php artisan tenantable:setup
 ```
 
 :::tip Publish Provider

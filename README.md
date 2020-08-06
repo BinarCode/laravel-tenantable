@@ -31,7 +31,7 @@ Let's say you have the `App\Models\Orgnization` as a tenant model.
 
 This model has to implement the `BinarCode\Tenantable\Tenant\Contracts\Tenant` contract.
 
-If you want to benefit of all of the methods the contract as you to implement, just extends the `BinarCode\Tenantable\Models\Tenant` class, and you don't have to add anything else in your model.
+If you want to benefit of all the methods the contract as you to implement, just extends the `BinarCode\Tenantable\Models\Tenant` class, and you don't have to add anything else in your model.
 
 Now I'll take it step by step, since I was very confused when I implemented my firt multitenancy application. 
 
@@ -41,7 +41,8 @@ Now I'll take it step by step, since I was very confused when I implemented my f
 You need 2 types of migrations, `master` and `tenant`. The migrations in the `app\database\migrations` directory, are used for `tenant`. If you have to add migrations for the `master` use `app\database\migrations\master` directory.
 
 
-...to be continue
+... [See oficial documenation](https://tenantable.binarcode.com/docs/1.0/quickstart.html)
+
 
 
 ## Testing
