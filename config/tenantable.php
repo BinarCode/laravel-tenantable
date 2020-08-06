@@ -26,12 +26,12 @@ return [
     *
     * Set to `null` to use the default connection.
     */
-    'tenant_database_connection_name' => 'tenant',
+    'tenant_database_connection_name' => 'mysql',
 
     /*
      * The connection name to reach the a landlord database
      */
-    'master_database_connection_name' => 'master',
+    'master_database_connection_name' => 'mysql',
 
     /*
      * Path to the migrations for the master connection
@@ -69,21 +69,20 @@ return [
      * This is pipeline list of actions to perform when a new tenant was created
      */
     'created_pipeline' => [
-        BinarCode\Tenantable\Tenant\DatabaseCreatorPipe::class,
+        //
     ],
 
     /*
      * This is pipeline list of actions to perform when a tenant was removed
      */
     'deleted_pipeline' => [
-        BinarCode\Tenantable\Tenant\DatabaseDroperPipe::class,
+        //
     ],
 
     /*
      * This is pipeline list of actions when a tenant becomes active
      */
     'activating_pipeline' => [
-        BinarCode\Tenantable\Tenant\DatabaseSwitchingPipe::class,
         BinarCode\Tenantable\Tenant\CachePipe::class,
         BinarCode\Tenantable\Tenant\ContainerPipe::class,
         BinarCode\Tenantable\Tenant\AuthGuardPipe::class,
