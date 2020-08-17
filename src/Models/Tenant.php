@@ -79,7 +79,7 @@ class Tenant extends Model implements Tenantable
         return boolval($this->active);
     }
 
-    public function forget(): Tenant
+    public function forget(): Tenantable
     {
         $tenantConnectionName = $this->tenantDatabaseConnectionName();
 
