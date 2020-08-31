@@ -9,6 +9,10 @@ class EnsureValidTenantSession
 {
     public function handle($request, Closure $next)
     {
+        if ($isMasterDomain = config('tenantable.master_fqdn')) {
+            return $next($request);
+        }
+
         $sessionKey = 'ensure_valid_tenant_session_tenant_id';
 
         if (! $request->session()->has($sessionKey)) {
