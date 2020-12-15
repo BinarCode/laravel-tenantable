@@ -12,6 +12,8 @@ class TestCase extends Orchestra
         parent::setUp();
 
         $this->withFactories(__DIR__.'/database/factories');
+
+        $this->setUpDatabase();
     }
 
     protected function getPackageProviders($app)
@@ -31,7 +33,13 @@ class TestCase extends Orchestra
             'prefix' => '',
         ]);
 
+        $app['config']->set('tenantable.master_database_connection_name', 'master');
+    }
+
+    protected function setUpDatabase()
+    {
         include_once __DIR__.'/../database/migrations/create_tenantable_tables.php.stub';
+
         (new \CreateTenantableTables())->up();
     }
 }
