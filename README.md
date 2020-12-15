@@ -1,6 +1,6 @@
 # Laravel Tenantable
 
-<p align="center">
+<p align="left">
 <a href="https://packagist.org/packages/binarcode/laravel-tenantable"><img src="https://img.shields.io/packagist/dt/binarcode/laravel-tenantable" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/binarcode/laravel-tenantable"><img src="https://img.shields.io/packagist/v/binarcode/laravel-tenantable" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/binarcode/laravel-tenantable"><img src="https://img.shields.io/packagist/l/binarcode/laravel-tenantable" alt="License"></a>
