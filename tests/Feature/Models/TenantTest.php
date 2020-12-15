@@ -9,7 +9,7 @@ class TenantTest extends TestCase
 {
     public function test_it_can_create_a_model()
     {
-        /** * @var Tenant $tenant */
+        /** @var Tenant $tenant */
         $tenant = Tenant::create([
             'name' => 'Binar Code Building',
             'subdomain' => 'sample',
