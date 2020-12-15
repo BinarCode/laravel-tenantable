@@ -2,8 +2,6 @@
 
 namespace BinarCode\Tenantable\Models;
 
-use Illuminate\Support\Facades\App;
-
 /**
  * Trait BelongsToTenant
  * @package BinarCode\Tenantable\Models
@@ -20,9 +18,7 @@ trait BelongsToTenant
 
     public static function bootBelongsToTenant()
     {
-        if (! App::runningInConsole()) {
-            static::addGlobalScope(new TenantScope);
-        }
+        static::addGlobalScope(new TenantScope);
 
         static::creating(function ($model) {
             if (! $model->getAttribute(BelongsToTenant::$tenantIdColumn) && ! $model->relationLoaded('tenant')) {
