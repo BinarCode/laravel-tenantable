@@ -37,7 +37,6 @@ class Tenant extends Model implements Tenantable
     {
         $containerKey = config('tenantable.container_key');
 
-
         if (! app()->has($containerKey)) {
             return null;
         }

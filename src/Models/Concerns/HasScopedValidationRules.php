@@ -3,6 +3,8 @@
 namespace BinarCode\Tenantable\Models\Concerns;
 
 use BinarCode\Tenantable\Models\BelongsToTenant;
+use Illuminate\Validation\Rules\Exists;
+use Illuminate\Validation\Rules\Unique;
 
 /**
  * @package BinarCode\Tenantable\Models\Concerns;
