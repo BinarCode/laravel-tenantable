@@ -1,6 +1,6 @@
 # Laravel Tenantable
 
-<p align="center"><img src="./logo.png"></p>
+<p align="center"><img src="./docs/.vuepress/public/logo.png"></p>
 
 <p align="left">
 <a href="https://packagist.org/packages/binarcode/laravel-tenantable"><img src="https://img.shields.io/packagist/dt/binarcode/laravel-tenantable" alt="Total Downloads"></a>
