@@ -24,7 +24,7 @@ php artisan tenantable:setup
 
 ## Usage
 
-Let's say you have the `App\Models\Orgnization` as a tenant model. 
+Let's say you have the `App\Models\Organization` as a tenant model. 
 
 This model has to implement the `BinarCode\Tenantable\Tenant\Contracts\Tenant` contract.
 
