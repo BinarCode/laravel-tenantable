@@ -1,5 +1,6 @@
 # Laravel Tenantable
-https://banners.beyondco.de/Laravel%20Tenantable.png?theme=light&packageManager=composer+require&packageName=binarcode%2Flaravel-tenantable&pattern=architect&style=style_1&description=Multitenancy+Laravel+Package&md=1&showWatermark=0&fontSize=100px&images=https%3A%2F%2Flaravel.com%2Fimg%2Flogomark.min.svg
+
+<p align="center"><img src="./logo.png"></p>
 
 <p align="left">
 <a href="https://packagist.org/packages/binarcode/laravel-tenantable"><img src="https://img.shields.io/packagist/dt/binarcode/laravel-tenantable" alt="Total Downloads"></a>
