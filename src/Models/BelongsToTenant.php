@@ -9,11 +9,9 @@ namespace BinarCode\Tenantable\Models;
  */
 trait BelongsToTenant
 {
-    public static $tenantIdColumn = 'tenant_id';
-
     public function tenant()
     {
-        return $this->belongsTo(config('tenantable.model'), BelongsToTenant::$tenantIdColumn);
+        return $this->belongsTo(config('tenantable.model'), config('tenantable.related_tenant_column'));
     }
 
     public static function bootBelongsToTenant()
@@ -21,9 +19,9 @@ trait BelongsToTenant
         static::addGlobalScope(new TenantScope);
 
         static::creating(function ($model) {
-            if (! $model->getAttribute(BelongsToTenant::$tenantIdColumn) && ! $model->relationLoaded('tenant')) {
+            if (! $model->getAttribute(config('tenantable.related_tenant_column')) && ! $model->relationLoaded('tenant')) {
                 if (tenant()->check()) {
-                    $model->setAttribute(BelongsToTenant::$tenantIdColumn, tenant()->key());
+                    $model->setAttribute(config('tenantable.related_tenant_column'), tenant()->key());
                     $model->setRelation('tenant', tenant());
                 }
             }

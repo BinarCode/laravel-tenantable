@@ -3,15 +3,16 @@
 namespace BinarCode\Tenantable\Tests;
 
 use BinarCode\Tenantable\TenantableServiceProvider;
+use Orchestra\Testbench\Concerns\WithLaravelMigrations;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
+    use WithLaravelMigrations;
+
     public function setUp(): void
     {
         parent::setUp();
-
-        $this->withFactories(__DIR__.'/database/factories');
 
         $this->setUpDatabase();
     }

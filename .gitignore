@@ -2,9 +2,12 @@ build
 composer.lock
 vendor
 coverage
-.phpunit.result.cache
 .idea
-.php_cs.cache
+html
+output
 docs/node_modules
 docs/.vuepress/dist
+.phpunit.result.cache
+.php-cs-fixer.cache
+.php_cs.cache
 
