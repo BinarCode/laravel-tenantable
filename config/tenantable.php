@@ -6,6 +6,8 @@ return [
      */
     'table_name' => 'tenants',
 
+    'related_tenant_column' => env('TENANTABLE_RELATED_TENANT_COLUMN', 'tenant_id'),
+
     /**
      * The base model for tenant.
      */
