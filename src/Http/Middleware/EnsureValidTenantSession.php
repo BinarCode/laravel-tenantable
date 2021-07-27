@@ -18,7 +18,7 @@ class EnsureValidTenantSession
         $sessionKey = 'ensure_valid_tenant_session_tenant_id';
 
         /** * @var Tenant $tenant */
-        $tenant = app(config('tenantable.container_key', 'organization'));
+        $tenant = app(config('tenantable.container_key'));
 
         if (! $request->session()->has($sessionKey)) {
             $request->session()->put($sessionKey, $tenant->key());
