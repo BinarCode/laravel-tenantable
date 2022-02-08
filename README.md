@@ -1,5 +1,7 @@
 # Laravel Tenantable
 
+<p align="center"><img src="./docs/.vuepress/public/logo.png"></p>
+
 <p align="left">
 <a href="https://packagist.org/packages/binarcode/laravel-tenantable"><img src="https://img.shields.io/packagist/dt/binarcode/laravel-tenantable" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/binarcode/laravel-tenantable"><img src="https://img.shields.io/packagist/v/binarcode/laravel-tenantable" alt="Latest Stable Version"></a>
@@ -24,7 +26,7 @@ php artisan tenantable:setup
 
 ## Usage
 
-Let's say you have the `App\Models\Orgnization` as a tenant model. 
+Let's say you have the `App\Models\Organization` as a tenant model. 
 
 This model has to implement the `BinarCode\Tenantable\Tenant\Contracts\Tenant` contract.
 
