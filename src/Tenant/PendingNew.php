@@ -6,6 +6,7 @@ use BinarCode\Tenantable\Make;
 use BinarCode\Tenantable\Models\Tenant;
 use Illuminate\Contracts\Support\Arrayable;
 
+/** @psalm-suppress MissingTemplateParam */
 class PendingNew implements Arrayable
 {
     use Make;
