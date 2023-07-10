@@ -11,3 +11,20 @@ function fromTenant($property = null)
 {
     return data_get(app(Tenantable::class), $property);
 }
+
+if (! function_exists('withoutProtocol')) {
+    function withoutProtocol(string $fqdn = ''): string
+    {
+        return str_replace(['https://', 'http://', 'www.'], ['https://' => '', 'http://' => '', 'www.' => ''], $fqdn);
+    }
+}
+
+if (! function_exists('str')) {
+    /**
+     * @return Str
+     */
+    function str()
+    {
+        return resolve(Str::class);
+    }
+}
