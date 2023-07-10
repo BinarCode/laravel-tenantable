@@ -103,7 +103,8 @@ class Tenant extends Model implements Tenantable
          * @psalm-suppress UndefinedFunction
          */
         return new Attribute(
-            get: fn ($value
+            get: fn (
+                $value
             ) => config('tenantable.protocol')."://{$this->subdomain}.".withoutProtocol(config('tenantable.master_domain')),
         );
     }
@@ -114,7 +115,8 @@ class Tenant extends Model implements Tenantable
          * @psalm-suppress UndefinedFunction
          */
         return new Attribute(
-            get: fn ($value
+            get: fn (
+                $value
             ) => config('tenantable.protocol')."://{$this->subdomain}.".withoutProtocol(config('tenantable.master_domain')).'/api',
         );
     }
