@@ -18,13 +18,3 @@ if (! function_exists('withoutProtocol')) {
         return str_replace(['https://', 'http://', 'www.'], ['https://' => '', 'http://' => '', 'www.' => ''], $fqdn);
     }
 }
-
-if (! function_exists('str')) {
-    /**
-     * @return Str
-     */
-    function str()
-    {
-        return resolve(Str::class);
-    }
-}

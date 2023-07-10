@@ -38,7 +38,7 @@ class Tenant extends Model implements Tenantable
     {
         $containerKey = config('tenantable.container_key');
 
-        if (! app()->has($containerKey)) {
+        if (!app()->has($containerKey)) {
             return null;
         }
 
@@ -52,7 +52,7 @@ class Tenant extends Model implements Tenantable
 
     public static function isMaster(): bool
     {
-        return ! static::check();
+        return !static::check();
     }
 
     public function makeCurrent(): Tenantable
@@ -103,7 +103,7 @@ class Tenant extends Model implements Tenantable
          * @psalm-suppress UndefinedFunction
          */
         return new Attribute(
-            get: fn ($value
+            get: fn(
             ) => config('tenantable.protocol')."://{$this->subdomain}.".withoutProtocol(config('tenantable.master_domain')),
         );
     }
@@ -114,14 +114,14 @@ class Tenant extends Model implements Tenantable
          * @psalm-suppress UndefinedFunction
          */
         return new Attribute(
-            get: fn ($value
+            get: fn(
             ) => config('tenantable.protocol')."://{$this->subdomain}.".withoutProtocol(config('tenantable.master_domain')).'/api',
         );
     }
 
     public function frontendRoute(string $route, array $query = []): string
     {
-        $route = str($route)->whenStartsWith('/', fn ($str) => $str->replaceFirst('/', ''))->toString();
+        $route = str($route)->whenStartsWith('/', fn($str) => $str->replaceFirst('/', ''))->toString();
 
         return "{$this->frontend}/{$route}".(count($query) ? '?'.http_build_query($query) : '');
     }
