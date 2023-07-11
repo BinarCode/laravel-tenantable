@@ -11,6 +11,13 @@ return [
     'related_tenant_column' => env('TENANTABLE_RELATED_TENANT_COLUMN', 'tenant_id'),
 
     /**
+     * Allow the `tenant_id` to be null.
+     *
+     * If the entry does have null tenant_id, it will be considered as a global entry.
+     */
+    'allow_nullable_tenant' => env('ALLOW_NULLABLE_TENANT', false),
+
+    /**
      * The base model for tenant.
      */
     'model' => Tenant::class,

@@ -10,7 +10,17 @@ class TenantScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        $builder->where($model->qualifyColumn(config('tenantable.related_tenant_column')), tenant()->key());
+        $column = $model->qualifyColumn(config('tenantable.related_tenant_column'));
+        $tenantKey = tenant()->key();
+
+        if (config('tenantable.allow_nullable_tenant')) {
+            $builder->where(function (Builder $query) use ($column, $tenantKey) {
+                $query->whereNull($column)
+                    ->orWhere($column, $tenantKey);
+            });
+        } else {
+            $builder->where($column, $tenantKey);
+        }
     }
 
     public function extend(Builder $builder)
