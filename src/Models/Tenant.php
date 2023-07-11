@@ -87,6 +87,10 @@ class Tenant extends Model implements Tenantable
             "database.connections.{$tenantConnectionName}.database" => null,
         ]);
 
+        app()->forgetInstance($this->containerKey());
+
+        app()->forgetInstance(Tenantable::class);
+
         DB::purge($tenantConnectionName);
 
         return $this;
