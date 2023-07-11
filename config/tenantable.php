@@ -1,5 +1,7 @@
 <?php
 
+use BinarCode\Tenantable\Models\Tenant;
+
 return [
     /**
      * The name of the table in the database.
@@ -13,15 +15,15 @@ return [
      *
      * If the entry does have null tenant_id, it will be considered as a global entry.
      */
-    'allow_nullable_tenant' => env('ALLOW_NULLABLE_TENANT', true),
+    'allow_nullable_tenant' => env('ALLOW_NULLABLE_TENANT', false),
 
     /**
      * The base model for tenant.
      */
-    'model' => BinarCode\Tenantable\Models\TenantContract::class,
+    'model' => Tenant::class,
 
     /*
-    * Domain for the maine application
+    * Domain for the main application
     */
     'master_domain' => env('MASTER_DOMAIN', 'sample.test'),
 
@@ -29,6 +31,11 @@ return [
      * Master full qualified name.
      */
     'master_fqdn' => env('MASTER_FQDN', 'admin.sample.test'),
+
+    /**
+     * The HTTP protocol.
+     */
+    'protocol' => env('PROTOCOL', 'https'),
 
     /*
     * The connection name to reach the a tenant database.
