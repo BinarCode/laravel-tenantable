@@ -11,7 +11,9 @@ class TenantScope implements Scope
     public function apply(Builder $builder, Model $model)
     {
         $column = $model->qualifyColumn(config('tenantable.related_tenant_column'));
-        $tenantKey = tenant()->key();
+        $tenantKey = Tenant::check()
+            ? tenant()->key()
+            : null;
 
         if (config('tenantable.allow_nullable_tenant')) {
             $builder->where(function (Builder $query) use ($column, $tenantKey) {
